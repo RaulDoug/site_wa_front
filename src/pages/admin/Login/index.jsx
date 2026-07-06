@@ -24,20 +24,21 @@ export default function Login() {
     } catch (error) {
       const message = error.response?.data?.message || 'Erro ao ralizar login';
       setError(message);
+      console.log(error);
     }
   };
 
   return (
     <div className='form-login-container'>
-      <form onSubmit={handleLogin}>
-        <div className="form-login-user">
-          <label>Usuário:</label>
+      <form onSubmit={handleLogin} className='form-login'>
+        <div className="form-login-input">
+          <label>Usuário</label>
           <input type="text" value={name} onChange={
             (e) => setName(e.target.value)} required
           />
         </div>
-        <div className="form-login-pass">
-          <label>Senha:</label>
+        <div className="form-login-input">
+          <label>Senha</label>
           <input type="password" value={pass} onChange={
             (e) => setPass(e.target.value)} required
           />
@@ -45,9 +46,7 @@ export default function Login() {
         <div className="form-error">
           {error && <p>{error}</p>}
         </div>
-        <div className="form-btn">
-          <button type='submit'>Entrar</button>
-        </div>
+        <button type='submit' className="form-btn">Entrar</button>
       </form>
     </div>
   );

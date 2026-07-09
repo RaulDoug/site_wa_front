@@ -1,0 +1,77 @@
+.cta-background {
+  background-color: var(--gray);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--background-white);
+  width: 95vw;
+  min-height: 220px; /* Aumentado para comportar o conteúdo sem espremer */
+  position: relative;
+  border-radius: 15px; /* Bordas arredondadas para combinar com o design */
+  overflow: hidden;    /* Garante que a imagem e o overlay respeitem as bordas arredondadas */
+}
+
+.cta-section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.cta-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(to right,
+      rgba(10, 43, 81, 0.9),
+      rgba(21, 87, 163, 0.85),
+      rgba(52, 136, 235, 0.8));
+  z-index: 2;
+}
+
+.cta-title {
+  font-size: 1.3rem;
+  font-weight: 550;
+}
+
+.cta-desc {
+  font-size: 0.9rem;
+}
+
+.whats-btn-cta {
+  width: 60%;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+
+.whats-btn-cta p {
+  font-size: 1.1rem;
+  font-weight: 550;
+}
+
+.whats-btn-cta .whatsapp-icon {
+  font-size: 1.7rem;
+  font-weight: bolder;
+}

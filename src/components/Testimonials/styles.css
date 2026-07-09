@@ -1,0 +1,128 @@
+.testimonials-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonials-section-title {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  font-weight: 550;
+  padding-top: 1rem;
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.testimonials-list {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 2.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  scroll-padding-left: 4rem;
+  -ms-overflow-style: none;
+}
+
+.testimonials-item {
+  display: grid;
+  grid-template-areas:
+    'top top'
+    'bottom bottom';
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 35% 65%;
+  min-width: 95%;
+  height: 200px;
+  box-shadow: 0px 0px 10px 4px rgba(143, 146, 148, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.testimonial-top {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+}
+
+.initials-container {
+  background-color: var(--primary-blue);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.inicial-user {
+  color: var(--background-white);
+  font-size: 1.3rem;
+}
+
+.testimonial-top-right {
+  color: var(--text-dark);
+}
+
+.testimonial-bottom {
+  grid-area: bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--text-dark);
+}
+
+.testimonial-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  align-self: center;
+  overflow: hidden;
+  font-size: 0.9rem;
+  padding-top: 0.5rem;
+}
+
+.testimonial-date {
+  color: var(--text-dark);
+  font-size: 0.85rem;
+  padding-bottom: 1rem;
+}
+
+.star-active {
+  color: #FFC107;
+}
+
+.star-inactive {
+  color: #E4E5E9;
+}
+
+/* TABLET 768px */
+@media (min-width: 768px) {
+  .testimonials-item {
+    min-width: 35%;
+  }
+}
+
+/* DESKTOP 1024px */
+@media (min-width: 1024px) {
+  .testimonials-item {
+    min-width: 25%;
+  }
+}
+
+/* WIDE 1440px */
+@media (min-width: 1440px) {
+  .testimonials-item {
+    min-width: 20%;
+  }
+}

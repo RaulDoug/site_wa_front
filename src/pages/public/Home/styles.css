@@ -1,0 +1,10 @@
+.cta-middle-home {
+  width: 95%;
+  border-radius: 15px;
+  margin: 0 0.5rem;
+}
+
+.cta-end-home {
+  width: 100%;
+  border-radius: 0;
+}

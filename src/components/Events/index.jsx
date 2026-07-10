@@ -1,44 +1,20 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../services/api.js';
+import { useEvents } from '../../hooks/useEvents.js';
 import './styles.css';
 import eventImg from '../../assets/evento.png';
 import { FaLocationDot } from 'react-icons/fa6';
 
 
 export default function Events({ limit }) {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        const response = await api.get('/events');
-
-        setEvents(response.data);
-      } catch (error) {
-        console.log(error);
-        setError('Não foi possível carregar a agenda de eventos no momento.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadEvents();
-  }, []);
+  const { events: displayedEvents, loading, error } = useEvents({ limit });
 
   if (loading) {
-    return <div className='events-loading'><p>Carregendo eventos...</p></div>;
+    return <div className='events-loading'><p>Carregando eventos...</p></div>;
   }
 
   if (error) {
     return <div className="events-error"><p>{error}</p></div>;
   }
-
-  const sortedEvents = [...events].sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
-
-  const displayedEvents = limit ? sortedEvents.slice(0, limit) : sortedEvents;
 
   return (
     <section id='events' className="events-section">

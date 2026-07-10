@@ -4,6 +4,7 @@ import Login from '../pages/admin/Login';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import AdminDash from '../pages/admin/AdminDash';
 import Blog from '../pages/public/Blog/index.jsx';
+import Agenda from '../pages/public/Agenda/index.jsx';
 
 export default function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ export default function AppRoutes() {
       {/* Rotas públicas */}
       <Route path='/' element={<Home />} />
       <Route path='/blog' element={<Blog />} />
+      <Route path='/agenda' element={<Agenda />} />
       <Route path='/login' element={<Login />} />
 
       {/* Rotas protegidas (ADM) */}

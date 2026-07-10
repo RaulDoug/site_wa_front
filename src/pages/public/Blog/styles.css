@@ -3,14 +3,17 @@
 }
 
 .blog-title-container {
-  background-color: var(--gray);
+  background: linear-gradient(to right,
+      rgba(16, 75, 153, 0.95) 0%,
+      rgba(32, 88, 153, 0.9) 60%,
+      rgba(50, 108, 175, 0.85) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 1rem;
-  color: var(--text-dark);
+  padding: 1rem 0;
+  color: var(--background-white);
   gap: 0.5rem;
 }
 

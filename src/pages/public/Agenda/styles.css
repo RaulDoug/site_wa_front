@@ -1,0 +1,22 @@
+.agenda-title-container {
+  margin-top: 9vh;
+  background: linear-gradient(to right,
+      rgba(16, 75, 153, 0.95) 0%,
+      rgba(32, 88, 153, 0.9) 60%,
+      rgba(50, 108, 175, 0.85) 100%);
+  color: var(--background-white);
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.agenda-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.agenda-title-desc {
+  font-size: 0.95rem;
+  font-weight: 450;
+}

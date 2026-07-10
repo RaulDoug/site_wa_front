@@ -1,0 +1,237 @@
+.event-sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  gap: 1rem;
+}
+
+.event-sub-card {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-height: 350px;
+  position: relative;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.event-sub-card:hover,
+.event-sub-card:active {
+  transform: scale(1.02);
+
+  & .event-sub-read-more {
+    color: var(--orange);
+    padding-left: 5px;
+  }
+}
+
+.event-sub-img-container {
+  width: 100%;
+  height: 45%;
+}
+
+.event-sub-img-container img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 15px 15px 0 0;
+  z-index: 1;
+}
+
+.event-sub-date-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--orange);
+  width: 45px;
+  color: var(--background-white);
+  border-radius: 0 0 8px 8px;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  z-index: 2;
+}
+
+.event-sub-day {
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+.event-sub-month {
+  font-size: 0.9rem;
+  font-weight: 550;
+}
+
+.event-sub-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.event-sub-title {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.event-sub-date-loc-info {
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  gap: 0.15rem;
+  padding-bottom: 0.4rem;
+}
+
+.event-sub-date {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.event-sub-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-sub-read-more {
+  color: var(--primary-blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding-top: 0.3rem;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+/* DETALHES EVENTO */
+.event-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.event-detail-container img {
+  border-radius: 15px;
+  border: 3px solid var(--gray);
+}
+
+.text-content-event {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: var(--text-dark);
+}
+
+.text-content-event h1 {
+  font-size: 1.3rem;
+  font-weight: 650;
+}
+
+.event-full-content {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.event-sub-btn {
+  background-color: var(--orange);
+  color: var(--background-white);
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 15px;
+  display: flex;
+  width: 55%;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.event-sub-btn:hover,
+.event-sub-btn:active {
+  background-color: var(--primary-blue);
+  transform: scale(1.05);
+}
+
+/* TABLET 768px */
+@media (min-width: 768px) {
+  .event-sub-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    padding: 1rem;
+  }
+
+  .event-detail-container {
+    padding: 1rem 2rem;
+  }
+
+  .event-sub-btn {
+    text-align: center;
+    width: 30%;
+  }
+}
+
+/* DESKTOP 1024px */
+@media (min-width: 1024px) {
+  .event-sub-container {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1rem 2.5rem;
+  }
+
+  .event-detail-container {
+    display: grid;
+    grid-template-areas:
+      'btn btn'
+      'text img'
+      'btnWhats img';
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 0.2fr 2fr 1fr;
+    padding: 1rem 2.5rem;
+  }
+
+  .back-btn {
+    grid-area: btn;
+  }
+
+  .event-detail-container img {
+    grid-area: img;
+    width: 100%;
+    object-fit: contain;
+    max-height: 500px;
+
+  }
+
+  .text-content-event {
+    grid-area: text;
+  }
+
+  .event-sub-btn {
+    grid-area: btnWhats;
+    justify-self: left;
+    align-self: baseline;
+    width: 40%;
+  }
+}
+
+/* WIDE 1440px */
+@media (min-width: 1440px) {
+  .event-sub-container {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 1rem 3.5rem;
+  }
+
+  .text-content-event {
+    align-self: last baseline;
+    padding-bottom: 1rem;
+  }
+}

@@ -1,7 +1,6 @@
 import { usePosts } from '../../hooks/usePosts';
 import img from '../../assets/hero.png';
 import './styles.css';
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function PostsSubPage() {

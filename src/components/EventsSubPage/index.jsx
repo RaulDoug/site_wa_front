@@ -1,0 +1,104 @@
+import './styles.css';
+import { useEvents } from '../../hooks/useEvents.js';
+import eventImg from '../../assets/eventCardImage.png';
+import { useState, useEffect } from 'react';
+
+
+export default function EventsSubPage() {
+  const { events: displayedEvents, loading, error } = useEvents();
+
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [selectedEvent]);
+
+  if (loading) {
+    return <div className='events-loading'><p>Carregando eventos...</p></div>;
+  }
+
+  if (error) {
+    return <div className="events-error"><p>{error}</p></div>;
+  }
+
+  if (selectedEvent) {
+    const dateObj = new Date(selectedEvent.eventDate);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const monthInitials = dateObj.toLocaleDateString('pt-br', { month: 'short' });
+    const month = monthInitials.replace('.', '').toUpperCase();
+
+    return (
+      <div className="event-detail-container">
+        <button onClick={() => setSelectedEvent(null)} className="back-btn">
+          ← Voltar para agenda
+        </button>
+        <img src={eventImg} alt={selectedEvent.title} />
+        <div className="text-content-event">
+          <h1>{selectedEvent.title}</h1>
+          <div className="event-sub-date-loc-info">
+            <div className="event-sub-loc">
+              <p>{`${selectedEvent.eventLoc} | `}</p>
+            </div>
+            <div className="event-sub-date">
+              <span className="event-sub-date-day">{day}</span>
+              <span className="event-sub-date-month">{month}</span>
+            </div>
+          </div>
+          <div className="event-full-content">
+            <p>{selectedEvent.desc}</p>
+          </div>
+        </div>
+        <a href='whatsapp.com' className='event-sub-btn'>
+          <p>Confirmar participação</p>
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="event-sub-container">
+      {displayedEvents.map((event) => {
+        const dateObj = new Date(event.eventDate);
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        const monthInitials = dateObj.toLocaleDateString('pt-br', { month: 'short' });
+        const month = monthInitials.replace('.', '').toUpperCase();
+
+        const formatedDate = (
+          <div className="event-sub-date-loc-info">
+            <div className="event-sub-loc">
+              <p>{`${event.eventLoc} | `}</p>
+            </div>
+            <div className="event-sub-date">
+              <span className="event-sub-date-day">{day}</span>
+              <span className="event-sub-date-month">{month}</span>
+            </div>
+          </div>
+        );
+
+        return (
+          <div key={event._id} className="event-sub-card" onClick={() => setSelectedEvent(event)}>
+            <div className="event-sub-img-container">
+              <img src={eventImg} alt="Imagem do evento" />
+            </div>
+            <div className="event-sub-date-container">
+              <span className="event-sub-day">{day}</span>
+              <span className="event-sub-month">{month}</span>
+            </div>
+            <div className="event-sub-info">
+              <h3 className="event-sub-title">
+                {event.title}
+              </h3>
+              {formatedDate}
+              <p className="event-sub-desc">
+                {event.desc}
+              </p>
+              <span className="event-sub-read-more">
+                Ver mais
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

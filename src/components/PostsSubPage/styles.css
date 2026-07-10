@@ -29,6 +29,7 @@
 
   & .post-sub-read-more {
     color: var(--orange);
+    padding-left: 5px;
   }
 }
 
@@ -84,7 +85,7 @@
 .post-sub-read-more {
   color: var(--primary-blue);
   font-size: 0.8rem;
-  transition: 0.3s ease-in-out;
+  transition: 0.4s ease-in-out;
 }
 
 .post-sub-read-more:hover,

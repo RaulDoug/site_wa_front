@@ -6,7 +6,7 @@ import './styles.css';
 
 export default function Blog() {
   return (
-    <section className='blog-page'>
+    <div className='blog-page'>
       <Header />
       <div className="blog-title-container">
         <h2 className="blog-title">
@@ -23,6 +23,6 @@ export default function Blog() {
         className='cta-blog'
       />
       <Footer />
-    </section>
+    </div>
   );
 }

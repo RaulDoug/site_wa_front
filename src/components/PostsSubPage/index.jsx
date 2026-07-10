@@ -46,20 +46,22 @@ export default function PostsSubPage() {
           <div className="post-sub-image">
             <img src={img} alt="Imagem do post" />
           </div>
-          <div className="post-sub-title-container">
-            <h2 className="post-sub-title">
-              {post.title}
-            </h2>
-            <h3 className="post-sub-subtitle">
-              {post.subtitle}
-            </h3>
-          </div>
-          <p className="post-author">
-            {post.author}
-          </p>
-          <div className="post-sub-content">
-            <p>{post.content}</p>
-            <span className='post-sub-read-more'>Ler mais</span>
+          <div className="post-sub-card-text-content">
+            <div className="post-sub-title-container">
+              <h2 className="post-sub-title">
+                {post.title}
+              </h2>
+              <h3 className="post-sub-subtitle">
+                {post.subtitle}
+              </h3>
+            </div>
+            <p className="post-author">
+              {post.author}
+            </p>
+            <div className="post-sub-content">
+              <p>{post.content}</p>
+              <span className='post-sub-read-more'>Ler mais</span>
+            </div>
           </div>
         </div>
       ))}

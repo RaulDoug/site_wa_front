@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 import api from '../../../services/api.js';
 import './styles.css';
 
@@ -47,6 +48,9 @@ export default function Login() {
           {error && <p>{error}</p>}
         </div>
         <button type='submit' className="form-btn">Entrar</button>
+        <Link to='/' className="form-back-btn">
+          <FaArrowLeft className="back-icon" /> Voltar ao site
+        </Link>
       </form>
     </div>
   );

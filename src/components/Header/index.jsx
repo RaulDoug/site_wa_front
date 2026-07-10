@@ -2,14 +2,17 @@ import './styles.css';
 import logo from '../../assets/logoMobile.png';
 import { FaBars, FaTimes, FaRegUser } from 'react-icons/fa';
 import { IoHomeOutline } from 'react-icons/io5';
-import { MdOutlineEventAvailable, MdOutlineWorkOutline } from 'react-icons/md';
+import { MdOutlineEventAvailable, MdOutlineWorkOutline, MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { FaRegNewspaper } from 'react-icons/fa6';
 import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import WhatsappBtn from '../WhatsappBtn';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem('token');
+  });
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -25,6 +28,9 @@ export default function Header() {
           <NavLink to='/agenda' className='header-nav-link'>Agenda</NavLink>
           <NavLink to='/servicos' className='header-nav-link'>Serviços</NavLink>
           <NavLink to='/sobre' className='header-nav-link'>Sobre nós</NavLink>
+          {isAuthenticated && (
+            <NavLink to='/warotaadm' className='header-nav-link'>Painel ADM</NavLink>
+          )}
         </nav>
         <button className='header-sidebar-btn' onClick={toggleSidebar}>
           <FaBars className='sidebar-btn-icon' />
@@ -62,6 +68,12 @@ export default function Header() {
             <FaRegUser className='sidebar-links-icons' />
             <p>Sobre nós</p>
           </NavLink>
+          {isAuthenticated && (
+            <NavLink to='/warotaadm' onClick={toggleSidebar} className='navlink-sidebar'>
+              <MdOutlineAdminPanelSettings className='sidebar-links-icons' />
+              <p>Painel ADM</p>
+            </NavLink>
+          )}
         </nav>
         <WhatsappBtn />
       </aside>

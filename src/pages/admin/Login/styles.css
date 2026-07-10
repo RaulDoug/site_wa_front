@@ -15,7 +15,7 @@
   align-items: center;
   gap: 0.5rem;
   width: 300px;
-  height: 300px;
+  padding: 2rem 0;
   border: 2px solid var(--secondary-gray);
   border-radius: 15px;
 }
@@ -35,7 +35,7 @@
 }
 
 .form-login-input input {
-  border: 2px solid var(--secondary-gray);
+  border: 2px solid var(--primary-blue);
   border-radius: 15px;
   font-size: 0.8rem;
   padding: 2px;
@@ -52,14 +52,37 @@
 .form-btn {
   width: 70%;
   background-color: var(--primary-blue);
-  color: var(--backgroud-white);
+  color: var(--background-white);
   font-size: 1rem;
   padding: 0.2rem;
   border-radius: 15px;
   border: none;
   transition: 0.3s ease-in;
+  cursor: pointer;
 }
 
 .form-btn:hover {
   transform: scale(1.03);
+}
+
+.form-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-back-btn:hover {
+  color: var(--text-dark);
+  transform: translateX(-3px);
+}
+
+.back-icon {
+  margin-right: 6px;
+  font-size: 0.8rem;
 }

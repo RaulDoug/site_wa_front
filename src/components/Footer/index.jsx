@@ -26,9 +26,9 @@ export default function Footer() {
                 </a>
               </li>
               <li className="nav-item-list">
-                <a href="#about">
+                <Link to="/sobre">
                   Sobre nós
-                </a>
+                </Link>
               </li>
               <li className="nav-item-list">
                 <a href="#testimonials">
@@ -46,32 +46,32 @@ export default function Footer() {
             <h3>Serviços</h3>
             <ul className="footer-nav-list">
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Escrituração Fiscal
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Departamento Pessoal
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Legalização de Empresas
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Obrigações Acessórias
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Regularização Fiscal
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Distribuição de Lucros
                 </Link>
               </li>
@@ -81,32 +81,32 @@ export default function Footer() {
             <h3>Consultorias</h3>
             <ul className="footer-nav-list">
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Planejamento Tributário
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   BPO Financeiro
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Evolução de MPEs
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Viabilidade Econômica
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Controladoria e Custos
                 </Link>
               </li>
               <li className="nav-item-list">
-                <Link to='/'>
+                <Link to='/servicos'>
                   Proteção Patrimonial
                 </Link>
               </li>

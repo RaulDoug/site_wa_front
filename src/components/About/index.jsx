@@ -19,7 +19,7 @@ export default function About() {
           <p className="about-info-desc">
             Na WA Contabilidade, unimos tecnologia, gestão tributária inteligente e um atendimento próximo para ajudar empresas a crescerem com segurança e redução de carga tributária. Com expertise consolidada no setor farmacêutico e em diversos outros segmentos, nossa missão é ser o braço estratégico que viabiliza o seu sucesso, garantindo eficiência financeira e decisões mais seguras para sua empresa.
           </p>
-          <Link to='/about' className='view-more-btn view-more-about'>
+          <Link to='/sobre' className='view-more-btn view-more-about'>
             Ver mais
           </Link>
         </div>

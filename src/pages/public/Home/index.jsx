@@ -26,11 +26,6 @@ export default function Home() {
       />
       <Testionials />
       <Location />
-      <Cta
-        title='Fale com nossos especialistas'
-        desc='Soluções contábeis inteligentes para empresas que querem crescer.'
-        className='cta-end-home'
-      />
       <Footer />
     </div>
   );

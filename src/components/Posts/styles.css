@@ -2,44 +2,36 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-bottom: 1rem;
+  padding: 3rem 1rem;
   text-align: center;
   position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .post-section-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--text-dark);
-  font-weight: 550;
-  padding: 1rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
 }
 
-.caroulse-wrapper {
+.carousel-wrapper {
   position: relative;
   width: 100%;
   display: flex;
   align-items: center;
 }
 
-.post-title {
-  color: var(--text-dark);
-  font-size: 1rem;
-  font-weight: 550;
-}
-
-.post-subtitle {
-  display: none;
-}
-
 .post-grid {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
-  padding: 1rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  scroll-padding-left: 3rem;
+  scroll-padding-left: 2.5rem;
   -ms-overflow-style: none;
 }
 
@@ -47,86 +39,143 @@
   display: none;
 }
 
+/* Card de Postagem do Carrossel */
 .post-card {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 10px 4px rgba(143, 146, 148, 0.7);
-  border-radius: 15px;
-  min-width: 180px;
-  height: 230px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  border-radius: 16px;
+  min-width: 260px;
+  height: 320px;
   background-color: var(--background-white);
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem;
+  padding: 1rem;
   scroll-snap-align: start;
   user-select: none;
   text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: flex-start;
+  gap: 0.8rem;
 }
 
-.read-post {
-  align-self: flex-start;
-  color: var(--primary-blue);
-  font-size: 0.95rem;
-  font-weight: 550;
-  transition: 0.3s ease-in-out;
-}
-
-.read-post:hover,
-.read-post:active {
-  padding-left: 5px;
-  color: var(--orange);
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 15px 35px rgba(21, 87, 163, 0.12);
+  border-color: rgba(21, 87, 163, 0.1);
 }
 
 .post-img {
   object-fit: cover;
   width: 100%;
-  height: 50%;
-  border-radius: 15px;
+  height: 140px;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
 }
+
+.post-card:hover .post-img {
+  transform: scale(1.04);
+}
+
+.post-title {
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.post-card:hover .post-title {
+  color: var(--primary-blue);
+}
+
+.post-subtitle {
+  font-size: 0.85rem;
+  color: #666666;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.read-post {
+  align-self: flex-start;
+  color: var(--primary-blue);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.read-post::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.post-card:hover .read-post {
+  color: var(--orange);
+}
+
+.post-card:hover .read-post::after {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
 
 /* DESKTOP 1024px */
 @media (min-width: 1024px) {
+  .post-section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .post-grid {
+    padding: 1.5rem 3.5rem;
+    gap: 2rem;
+  }
+
   .post-card {
-    display: grid;
-    grid-template-columns: 100px 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas:
-      "img title title"
-      "img subtitle subtitle"
-      "img readMore readMore";
-    min-width: 320px;
-    height: 150px;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem 1rem;
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    height: 385px;
+    gap: 1rem;
+    padding: 1.2rem;
   }
 
   .post-card .post-img {
-    grid-area: img;
     width: 100%;
-    height: 100%;
+    height: 180px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
   }
 
   .post-card .post-title {
-    grid-area: title;
-    font-size: 1rem;
-    align-self: center;
+    font-size: 1.1rem;
+    font-weight: 700;
   }
 
   .post-card .post-subtitle {
-    display: flex;
-    grid-area: subtitle;
-    font-size: 0.8rem;
-    color: var(--text-dark);
-    opacity: 0.8;
-    align-self: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.85rem;
   }
 
   .post-card .read-post {
-    grid-area: readMore;
-    align-self: center;
+    margin-top: auto;
   }
 }

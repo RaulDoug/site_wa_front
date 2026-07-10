@@ -2,7 +2,7 @@
 header {
   height: 9vh;
   width: 100%;
-  padding: 0.3rem 0.5rem;
+  padding: 0.3rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,12 +10,15 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--background-white);
-  border-radius: 0 0 10px 10px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .header-logo {
-  width: 30%;
+  width: 28%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -34,19 +37,20 @@ header {
 .sidebar-close-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   background-color: transparent;
-  transition: color 0.3s ease-in-out;
-  font-size: 1.8rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.6rem;
   color: var(--text-dark);
+  cursor: pointer;
 }
 
 .header-sidebar-btn:hover,
 .header-sidebar-btn:active,
 .sidebar-close-btn:hover,
 .sidebar-close-btn:active {
-  transform: scale(1.03);
-  font-size: 1.9rem;
+  transform: scale(1.1);
   color: var(--orange);
 }
 
@@ -81,15 +85,15 @@ header .whats-btn-header,
   width: 80vw;
   height: 100vh;
   background-color: var(--background-white);
-  border-radius: 15px 0 0 15px;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 24px 0 0 24px;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.06);
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem 1.5rem;
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
-  gap: 2rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 2.5rem;
 }
 
 .sidebar-container.active {
@@ -99,37 +103,88 @@ header .whats-btn-header,
 .sidebar-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 1.2rem;
 }
 
 .sidebar-header img {
-  width: 48%;
-  height: 9vh;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sidebar-close-btn {
+  width: 38px;
+  height: 38px;
+  background-color: var(--gray) !important;
+  border-radius: 50% !important;
+  font-size: 1.2rem !important;
+  color: var(--text-dark);
 }
 
 .sidebar-links {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.8rem;
 }
 
 .sidebar-links-icons {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
 }
 
 .sidebar-links .navlink-sidebar {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  transition: padding-left 0.2s, color 0.2s;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #555555;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
 }
 
-.sidebar-links .navlink-sidebar:hover,
-.sidebar-links .navlink-sidebar.active {
+.sidebar-links .navlink-sidebar:hover {
+  background-color: rgba(21, 87, 163, 0.04);
   color: var(--primary-blue);
-  padding-left: 5px;
+  padding-left: 1.5rem;
+}
+
+.sidebar-links .navlink-sidebar.active {
+  background-color: rgba(21, 87, 163, 0.08);
+  color: var(--primary-blue);
+  border-left-color: var(--primary-blue);
+}
+
+.sidebar-links .navlink-sidebar.active .sidebar-links-icons {
+  color: var(--primary-blue);
+  transform: scale(1.1);
+}
+
+/* Sidebar WhatsApp button customization */
+.sidebar-container .whastapp-container {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25d366;
+  color: var(--background-white);
+  font-weight: 700;
+  box-shadow: 0px 5px 15px rgba(37, 211, 102, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sidebar-container .whastapp-container:hover {
+  background-color: #128c7e;
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 20px rgba(37, 211, 102, 0.35);
 }
 
 /* TABLET 768px */
@@ -177,14 +232,30 @@ header .whats-btn-header,
 
   .header-links .header-nav-link {
     font-size: 1rem;
-    border-bottom: 2px solid transparent;
-    transition: 0.3s ease-in-out;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .header-links .header-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-blue);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .header-links .header-nav-link:hover::after,
+  .header-links .header-nav-link.active::after {
+    width: 100%;
   }
 
   .header-links .header-nav-link:hover,
   .header-links .header-nav-link.active {
     color: var(--primary-blue);
-    border-bottom: 2px solid var(--primary-blue);
   }
 }
 

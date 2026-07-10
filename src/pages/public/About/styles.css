@@ -1,0 +1,268 @@
+.about-title-container {
+  margin-top: 9vh;
+  width: 100%;
+  background: linear-gradient(135deg, #071e36 0%, #1557A3 100%);
+  color: #ffffff;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-bottom: 4px solid var(--orange);
+}
+
+.about-title-container::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--orange);
+  filter: blur(90px);
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.about-title-sub {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  z-index: 2;
+  letter-spacing: -0.5px;
+}
+
+.about-title-desc {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85) !important;
+  z-index: 2;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.about-subpage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 2.5rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Seção de Introdução */
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-subtitle {
+  color: var(--orange);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-intro-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.about-intro-text p {
+  font-size: 0.95rem;
+  color: #555555;
+  line-height: 1.6;
+  font-weight: 450;
+}
+
+.about-intro-img {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.about-intro-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Missão e Visão */
+.about-mission-vision {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.mission-card,
+.vision-card {
+  background-color: var(--gray);
+  padding: 2rem;
+  border-radius: 16px;
+  border-left: 5px solid var(--primary-blue);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.vision-card {
+  border-left-color: var(--orange);
+}
+
+.mission-card h4,
+.vision-card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.8rem;
+}
+
+.mission-card p,
+.vision-card p {
+  font-size: 0.95rem;
+  color: #444444;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Seção de Valores */
+.about-values-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.values-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.value-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--background-white);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 30px rgba(143, 146, 148, 0.4);
+}
+
+.value-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(21, 87, 163, 0.08);
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+}
+
+.value-icon {
+  font-size: 1.6rem;
+  color: var(--primary-blue);
+}
+
+/* Diferenciar o ícone para alternar cores se preferir */
+.value-card:nth-child(even) .value-icon-wrapper {
+  background-color: rgba(239, 126, 31, 0.08);
+}
+
+.value-card:nth-child(even) .value-icon {
+  color: var(--orange);
+}
+
+.value-card h5 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+}
+
+.value-card p {
+  font-size: 0.9rem;
+  color: #666666;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* TABLET 768px */
+@media (min-width: 768px) {
+  .about-subpage-content {
+    padding: 3.5rem 2rem;
+  }
+
+  .about-intro-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .about-mission-vision {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+  }
+
+  .about-intro-heading {
+    font-size: 2rem;
+  }
+}
+
+/* DESKTOP 1024px */
+@media (min-width: 1024px) {
+  .about-subpage-content {
+    padding: 4rem 3rem;
+    gap: 4.5rem;
+  }
+
+  .about-intro-grid {
+    gap: 4rem;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}

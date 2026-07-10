@@ -3,30 +3,50 @@
 }
 
 .blog-title-container {
-  background: linear-gradient(to right,
-      rgba(16, 75, 153, 0.95) 0%,
-      rgba(32, 88, 153, 0.9) 60%,
-      rgba(50, 108, 175, 0.85) 100%);
+  width: 100%;
+  background: linear-gradient(135deg, #071e36 0%, #1557A3 100%);
+  color: #ffffff;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 1rem 0;
-  color: var(--background-white);
   gap: 0.5rem;
+  border-bottom: 4px solid var(--orange);
+}
+
+.blog-title-container::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--orange);
+  filter: blur(90px);
+  opacity: 0.2;
+  z-index: 1;
 }
 
 .blog-title {
-  width: 95%;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  z-index: 2;
+  letter-spacing: -0.5px;
 }
 
 .blog-title-desc {
-  width: 95%;
-  font-size: 0.95rem;
-  font-weight: 450;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85) !important;
+  z-index: 2;
+  max-width: 600px;
+  line-height: 1.5;
 }
 
 .cta-blog {

@@ -35,18 +35,20 @@ export function useCarousel(itemsLength, cardClassName, autoPlayDelay = 4000) {
     if (carouselRef.current) {
       const { scrollLeft, clientWidth, scrollWidth } = carouselRef.current;
       const card = carouselRef.current.querySelector(`.${cardClassName}`);
-      const scrollAmount = card ? card.clientWidth + 16 : 200; // 16px é o gap comum
+      const computedStyle = window.getComputedStyle(carouselRef.current);
+      const gapValue = parseFloat(computedStyle.gap) || 16;
+      const scrollAmount = card ? card.clientWidth + gapValue : 200;
       const maxScroll = scrollWidth - clientWidth;
 
       if (direction === 'right') {
-        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+        const isAtEnd = scrollLeft >= maxScroll - 15 || (scrollLeft + scrollAmount) >= maxScroll + 10;
         if (isAtEnd) {
           animateScroll(carouselRef.current, 0);
         } else {
           animateScroll(carouselRef.current, scrollLeft + scrollAmount);
         }
       } else {
-        const isAtStart = scrollLeft <= 10;
+        const isAtStart = scrollLeft <= 15 || (scrollLeft - scrollAmount) <= -10;
         if (isAtStart) {
           animateScroll(carouselRef.current, maxScroll);
         } else {

@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import api from '../../services/api';
+import { usePosts } from '../../hooks/usePosts';
 import { useCarousel } from '../../hooks/useCarousel';
 import eventImg from '../../assets/evento.png';
 import './styles.css';
 
 
 export default function Posts() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { posts, loading, error } = usePosts();
 
   const {
     carouselRef,
@@ -18,23 +16,6 @@ export default function Posts() {
     carouselProps,
     wrapperProps
   } = useCarousel(posts.length, 'post-card');
-
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        const response = await api.get('/posts');
-
-        setPosts(response.data);
-      } catch (error) {
-        console.log(error);
-        setError('Não foi possível carregar as postagens no momento.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPosts();
-  }, []);
 
   if (loading) {
     return <div className='posts-loading'><p>Carregendo postagens...</p></div>;

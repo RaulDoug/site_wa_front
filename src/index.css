@@ -98,6 +98,30 @@ button {
   right: 5px;
 }
 
+/* Animação de pulsação suave */
+@keyframes skeleton-pulse {
+  0% {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  50% {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Classe utilitária para aplicar o efeito */
+.skeleton {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: inline-block;
+  width: 100%;
+}
+
+
 /* DESKTOP 1024px */
 @media (min-width: 1024px) {
   .view-more-container {

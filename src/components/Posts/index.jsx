@@ -24,7 +24,26 @@ export default function Posts() {
   } = useCarousel(posts.length, 'post-card');
 
   if (loading) {
-    return <div className='posts-loading'><p>Carregendo postagens...</p></div>;
+    return (
+      <section id='posts' className="posts-section">
+        <h2 className='post-section-title'>
+          Posts & Insights
+        </h2>
+        <div className="carousel-wrapper">
+          <div className="post-grid" style={{ overflow: 'hidden' }}>
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="post-card" style={{ pointerEvents: 'none' }}>
+                <div className="skeleton" style={{ height: '180px', borderRadius: '12px' }} />
+                <div className="skeleton" style={{ height: '24px', width: '80%', marginTop: '0.5rem' }} />
+                <div className="skeleton" style={{ height: '16px', width: '95%' }} />
+                <div className="skeleton" style={{ height: '16px', width: '60%' }} />
+                <div className="skeleton" style={{ height: '16px', width: '30%', marginTop: 'auto' }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
   }
 
   if (error) {

@@ -8,7 +8,29 @@ export default function Events({ limit }) {
   const { events: displayedEvents, loading, error } = useEvents({ limit });
 
   if (loading) {
-    return <div className='events-loading'><p>Carregando eventos...</p></div>;
+    return (
+      <section id='events' className="events-section" style={{ pointerEvents: 'none' }}>
+        <h2 className="events-section-title">
+          Eventos e Agenda
+        </h2>
+        <div className="events-grid">
+          {[1, 2].map((n) => (
+            <div key={n} className="event-card" style={{ minHeight: '150px' }}>
+              <div className="event-date-container skeleton" style={{ width: '55px', height: '65px', background: 'none' }}>
+                <div className="skeleton" style={{ height: '20px', width: '60%', margin: '4px auto' }} />
+                <div className="skeleton" style={{ height: '14px', width: '80%', margin: '4px auto' }} />
+              </div>
+              <div className="event-info" style={{ flex: 1 }}>
+                <div className="skeleton" style={{ height: '22px', width: '70%', marginBottom: '0.6rem' }} />
+                <div className="skeleton" style={{ height: '15px', width: '90%', marginBottom: '0.4rem' }} />
+                <div className="skeleton" style={{ height: '15px', width: '50%', marginBottom: '0.8rem' }} />
+                <div className="skeleton" style={{ height: '14px', width: '30%' }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
   }
 
   if (error) {

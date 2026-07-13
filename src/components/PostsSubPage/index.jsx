@@ -12,7 +12,30 @@ export default function PostsSubPage() {
   }, [selectedPost]);
 
   if (loading) {
-    return <div className='posts-loading'><p>Carregendo postagens...</p></div>;
+    return (
+      <div className="posts-list-sub" style={{ pointerEvents: 'none' }}>
+        {[1, 2, 3].map((n) => (
+          <div key={n} className="posts-sub-card">
+            <div className="post-sub-image">
+              <div className="skeleton" style={{ height: '100%', minHeight: '200px', borderRadius: '12px' }} />
+            </div>
+            <div className="post-sub-card-text-content" style={{ width: '100%' }}>
+              <div className="post-sub-title-container">
+                <div className="skeleton" style={{ height: '28px', width: '80%', marginBottom: '0.5rem' }} />
+                <div className="skeleton" style={{ height: '20px', width: '60%', marginBottom: '0.5rem' }} />
+              </div>
+              <div className="skeleton" style={{ height: '14px', width: '25%', marginBottom: '1rem' }} />
+              <div className="post-sub-content">
+                <div className="skeleton" style={{ height: '16px', width: '100%', marginBottom: '0.3rem' }} />
+                <div className="skeleton" style={{ height: '16px', width: '90%', marginBottom: '0.3rem' }} />
+                <div className="skeleton" style={{ height: '16px', width: '75%', marginBottom: '1rem' }} />
+                <div className="skeleton" style={{ height: '16px', width: '15%' }} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   if (error) {

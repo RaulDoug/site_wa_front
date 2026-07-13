@@ -12,7 +12,8 @@ import {
   FiMapPin,
   FiX,
   FiUser,
-  FiType
+  FiType,
+  FiLink
 } from 'react-icons/fi';
 import api from '../../../services/api';
 import './styles.css';
@@ -59,6 +60,7 @@ export default function AdminDash() {
     desc: '',
     imageUrl: '',
     eventLoc: '',
+    whatsappLink: '',
     eventDate: ''
   });
 
@@ -202,7 +204,7 @@ export default function AdminDash() {
   const handleOpenCreateEvent = () => {
     setFormType('event');
     setFormMode('create');
-    setEventForm({ title: '', desc: '', imageUrl: '', eventLoc: '', eventDate: '' });
+    setEventForm({ title: '', desc: '', imageUrl: '', eventLoc: '', whatsappLink: '', eventDate: '' });
     setSelectedId(null);
     setSelectedFile(null);
     setFormError('');
@@ -219,6 +221,7 @@ export default function AdminDash() {
       desc: event.desc,
       imageUrl: event.imageUrl || '',
       eventLoc: event.eventLoc,
+      whatsappLink: event.whatsappLink || '',
       eventDate: formattedDate
     });
     setSelectedId(event._id);
@@ -236,6 +239,7 @@ export default function AdminDash() {
       formData.append('title', eventForm.title);
       formData.append('desc', eventForm.desc);
       formData.append('eventLoc', eventForm.eventLoc);
+      formData.append('whatsappLink', eventForm.whatsappLink);
       formData.append('eventDate', eventForm.eventDate);
 
       if (selectedFile) {
@@ -732,6 +736,20 @@ export default function AdminDash() {
                         required
                       />
                     </div>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="event-whatsapp">Link do WhatsApp (Opcional)</label>
+                  <div className="input-with-icon">
+                    <FiLink className="input-icon" />
+                    <input
+                      id="event-whatsapp"
+                      type="url"
+                      placeholder="Ex: https://wa.me/5511999999999 ou link de grupo"
+                      value={eventForm.whatsappLink}
+                      onChange={(e) => setEventForm({ ...eventForm, whatsappLink: e.target.value })}
+                    />
                   </div>
                 </div>
 

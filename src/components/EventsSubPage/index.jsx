@@ -81,9 +81,11 @@ export default function EventsSubPage() {
             <p>{selectedEvent.desc}</p>
           </div>
         </div>
-        <a href='whatsapp.com' className='event-sub-btn'>
-          <p>Confirmar participação</p>
-        </a>
+        {selectedEvent.whatsappLink && (
+          <a href={selectedEvent.whatsappLink} target="_blank" rel="noopener noreferrer" className='event-sub-btn'>
+            <p>Confirmar participação</p>
+          </a>
+        )}
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEvents } from '../../hooks/useEvents.js';
 import './styles.css';
-import eventImg from '../../assets/evento.png';
 import { FaLocationDot } from 'react-icons/fa6';
 
 
@@ -14,6 +13,10 @@ export default function Events({ limit }) {
 
   if (error) {
     return <div className="events-error"><p>{error}</p></div>;
+  }
+
+  if (displayedEvents.length === 0) {
+    return null;
   }
 
   return (
@@ -36,10 +39,10 @@ export default function Events({ limit }) {
 
             return (
               <div key={event._id} className="event-card">
-                {/* {event.imageUrl && (
+                {event.imageUrl && (
                   <img src={event.imageUrl} alt="event-img" />
-                )} */}
-                <img src={eventImg} alt="event-img" />
+                )}
+                {/* <img src={eventImg} alt="event-img" /> */}
                 <div className="event-date-container">
                   <span className="event-day">{day}</span>
                   <span className="event-month">{month}</span>

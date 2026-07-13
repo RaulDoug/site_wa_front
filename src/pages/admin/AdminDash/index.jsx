@@ -27,7 +27,9 @@ export default function AdminDash() {
   const [posts, setPosts] = useState([]);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [formError, setFormError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   // Search & Filter States
@@ -59,6 +61,9 @@ export default function AdminDash() {
     eventLoc: '',
     eventDate: ''
   });
+
+  // Selected image file state
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // Delete Confirmation State
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -127,12 +132,21 @@ export default function AdminDash() {
     }, 4000);
   };
 
+  // --- CLOSE MODAL HELPER ---
+  const handleCloseFormModal = () => {
+    setShowFormModal(false);
+    setSelectedFile(null);
+    setFormError('');
+  };
+
   // --- CRUD POSTS ---
   const handleOpenCreatePost = () => {
     setFormType('post');
     setFormMode('create');
     setPostForm({ title: '', subtitle: '', author: '', imageUrl: '', content: '' });
     setSelectedId(null);
+    setSelectedFile(null);
+    setFormError('');
     setShowFormModal(true);
   };
 
@@ -147,25 +161,40 @@ export default function AdminDash() {
       content: post.content
     });
     setSelectedId(post._id);
+    setSelectedFile(null);
+    setFormError('');
     setShowFormModal(true);
   };
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setFormError('');
+    setSubmitting(true);
     try {
+      const formData = new FormData();
+      formData.append('title', postForm.title);
+      formData.append('subtitle', postForm.subtitle);
+      formData.append('author', postForm.author);
+      formData.append('content', postForm.content);
+
+      if (selectedFile) {
+        formData.append('image', selectedFile);
+      }
+
       if (formMode === 'create') {
-        const response = await api.post('/posts', postForm);
+        const response = await api.post('/posts', formData);
         showToast(response.data.message || 'Post criado com sucesso!');
       } else {
-        const response = await api.put(`/posts/${selectedId}`, postForm);
+        const response = await api.put(`/posts/${selectedId}`, formData);
         showToast(response.data.message || 'Post atualizado com sucesso!');
       }
-      setShowFormModal(false);
+      handleCloseFormModal();
       loadData();
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'Erro ao salvar a postagem. Verifique os campos.');
+      setFormError(err.response?.data?.message || 'Erro ao salvar a postagem. Verifique os campos.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -175,6 +204,8 @@ export default function AdminDash() {
     setFormMode('create');
     setEventForm({ title: '', desc: '', imageUrl: '', eventLoc: '', eventDate: '' });
     setSelectedId(null);
+    setSelectedFile(null);
+    setFormError('');
     setShowFormModal(true);
   };
 
@@ -191,25 +222,40 @@ export default function AdminDash() {
       eventDate: formattedDate
     });
     setSelectedId(event._id);
+    setSelectedFile(null);
+    setFormError('');
     setShowFormModal(true);
   };
 
   const handleEventSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setFormError('');
+    setSubmitting(true);
     try {
+      const formData = new FormData();
+      formData.append('title', eventForm.title);
+      formData.append('desc', eventForm.desc);
+      formData.append('eventLoc', eventForm.eventLoc);
+      formData.append('eventDate', eventForm.eventDate);
+
+      if (selectedFile) {
+        formData.append('image', selectedFile);
+      }
+
       if (formMode === 'create') {
-        const response = await api.post('/events', eventForm);
+        const response = await api.post('/events', formData);
         showToast(response.data.message || 'Evento criado com sucesso!');
       } else {
-        const response = await api.put(`/events/${selectedId}`, eventForm);
+        const response = await api.put(`/events/${selectedId}`, formData);
         showToast(response.data.message || 'Evento atualizado com sucesso!');
       }
-      setShowFormModal(false);
+      handleCloseFormModal();
       loadData();
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'Erro ao salvar o evento. Verifique os campos.');
+      setFormError(err.response?.data?.message || 'Erro ao salvar o evento. Verifique os campos.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -541,10 +587,16 @@ export default function AdminDash() {
                 {formMode === 'create' ? 'Adicionar' : 'Editar'}{' '}
                 {formType === 'post' ? 'Postagem' : 'Evento'}
               </h2>
-              <button onClick={() => setShowFormModal(false)} className="btn-close-modal">
+              <button onClick={handleCloseFormModal} className="btn-close-modal">
                 <FiX size={20} />
               </button>
             </div>
+            {formError && (
+              <div className="status-message status-error" style={{ margin: '1rem 1.5rem 0' }}>
+                <p>{formError}</p>
+                <button onClick={() => setFormError('')} className="btn-close-message"><FiX /></button>
+              </div>
+            )}
 
             {formType === 'post' ? (
               <form onSubmit={handlePostSubmit} className="modal-form">
@@ -590,14 +642,31 @@ export default function AdminDash() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="post-image">URL da Imagem</label>
-                  <input
-                    id="post-image"
-                    type="url"
-                    placeholder="https://exemplo.com/imagem.jpg"
-                    value={postForm.imageUrl}
-                    onChange={(e) => setPostForm({ ...postForm, imageUrl: e.target.value })}
-                  />
+                  <label>Imagem do Post</label>
+                  <div className="file-upload-wrapper">
+                    <label htmlFor="post-image" className="file-upload-label">
+                      <FiPlus size={16} />
+                      <span>{selectedFile ? 'Alterar Imagem' : 'Selecionar Imagem'}</span>
+                    </label>
+                    <input
+                      id="post-image"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => setSelectedFile(e.target.files[0])}
+                      style={{ display: 'none' }}
+                    />
+                    {selectedFile && (
+                      <div className="file-upload-preview">
+                        <span className="file-name">{selectedFile.name}</span>
+                        <button type="button" onClick={() => setSelectedFile(null)} className="btn-remove-file">Remover</button>
+                      </div>
+                    )}
+                  </div>
+                  {formMode === 'edit' && postForm.imageUrl && !selectedFile && (
+                    <span className="image-edit-preview-info">
+                      Imagem atual já cadastrada. Selecione um arquivo para substituir.
+                    </span>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -613,7 +682,7 @@ export default function AdminDash() {
                 </div>
 
                 <footer className="modal-footer">
-                  <button type="button" onClick={() => setShowFormModal(false)} className="btn-secondary">
+                  <button type="button" onClick={handleCloseFormModal} className="btn-secondary">
                     Cancelar
                   </button>
                   <button type="submit" className="btn-primary">
@@ -667,14 +736,31 @@ export default function AdminDash() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="event-image">URL da Imagem</label>
-                  <input
-                    id="event-image"
-                    type="url"
-                    placeholder="https://exemplo.com/evento.jpg"
-                    value={eventForm.imageUrl}
-                    onChange={(e) => setEventForm({ ...eventForm, imageUrl: e.target.value })}
-                  />
+                  <label>Imagem do Evento</label>
+                  <div className="file-upload-wrapper">
+                    <label htmlFor="event-image" className="file-upload-label">
+                      <FiPlus size={16} />
+                      <span>{selectedFile ? 'Alterar Imagem' : 'Selecionar Imagem'}</span>
+                    </label>
+                    <input
+                      id="event-image"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => setSelectedFile(e.target.files[0])}
+                      style={{ display: 'none' }}
+                    />
+                    {selectedFile && (
+                      <div className="file-upload-preview">
+                        <span className="file-name">{selectedFile.name}</span>
+                        <button type="button" onClick={() => setSelectedFile(null)} className="btn-remove-file">Remover</button>
+                      </div>
+                    )}
+                  </div>
+                  {formMode === 'edit' && eventForm.imageUrl && !selectedFile && (
+                    <span className="image-edit-preview-info">
+                      Imagem atual já cadastrada. Selecione um arquivo para substituir.
+                    </span>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -690,7 +776,7 @@ export default function AdminDash() {
                 </div>
 
                 <footer className="modal-footer">
-                  <button type="button" onClick={() => setShowFormModal(false)} className="btn-secondary">
+                  <button type="button" onClick={handleCloseFormModal} className="btn-secondary">
                     Cancelar
                   </button>
                   <button type="submit" className="btn-primary">
@@ -732,6 +818,13 @@ export default function AdminDash() {
               </button>
             </footer>
           </div>
+        </div>
+      )}
+      {/* OVERLAY DE LOADING NO SUBMIT */}
+      {submitting && (
+        <div className="submit-loading-overlay">
+          <div className="submit-spinner"></div>
+          <p>Salvando alterações...</p>
         </div>
       )}
     </div>

@@ -1,5 +1,4 @@
 import { usePosts } from '../../hooks/usePosts';
-import img from '../../assets/hero.png';
 import './styles.css';
 import { useState, useEffect } from 'react';
 
@@ -26,7 +25,7 @@ export default function PostsSubPage() {
         <button onClick={() => setSelectedPost(null)} className="back-btn">
           ← Voltar para o Blog
         </button>
-        <img src={img} alt={selectedPost.title} />
+        <img src={selectedPost.imageUrl} alt={selectedPost.title} />
         <div className="text-content">
           <h1>{selectedPost.title}</h1>
           <h3>{selectedPost.subtitle}</h3>
@@ -44,7 +43,9 @@ export default function PostsSubPage() {
       {posts.map(post => (
         <div key={post._id} className="posts-sub-card" onClick={() => setSelectedPost(post)}>
           <div className="post-sub-image">
-            <img src={img} alt="Imagem do post" />
+            {post.imageUrl && (
+              <img src={post.imageUrl} alt="post-img" />
+            )}
           </div>
           <div className="post-sub-card-text-content">
             <div className="post-sub-title-container">

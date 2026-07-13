@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { usePosts } from '../../hooks/usePosts';
 import { useCarousel } from '../../hooks/useCarousel';
-import eventImg from '../../assets/evento.png';
 import './styles.css';
 
 
 export default function Posts() {
   const { posts, loading, error } = usePosts();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const {
     carouselRef,
@@ -25,15 +31,28 @@ export default function Posts() {
     return <div className="posts-error"><p>{error}</p></div>;
   }
 
+  if (posts.length === 0) {
+    return null;
+  }
+
+  // Lógica de breakpoints para setinhas do carrossel
+  const showArrows = windowWidth <= 360
+    ? posts.length > 1
+    : windowWidth <= 768
+      ? posts.length > 2
+      : posts.length > 3;
+
   return (
     <section id='posts' className="posts-section">
       <h2 className='post-section-title'>
         Posts & Insights
       </h2>
       <div className="carousel-wrapper" {...wrapperProps} >
-        <button className='carousel-arrow left' onClick={() => handleScroll('left')}>
-          <FaChevronLeft />
-        </button>
+        {showArrows && (
+          <button className='carousel-arrow left' onClick={() => handleScroll('left')}>
+            <FaChevronLeft />
+          </button>
+        )}
 
         <div
           ref={carouselRef}
@@ -47,10 +66,10 @@ export default function Posts() {
 
               return (
                 <div key={post._id} className="post-card">
-                  {/* {post.imageUrl && (
-                    <img src={post.imageUrl} alt="post-img" />
-                  )} */}
-                  <img src={eventImg} alt="post-img" className='post-img' />
+                  {post.imageUrl && (
+                    <img src={post.imageUrl} alt="post-img" className="post-img" />
+                  )}
+                  {/* <img src={eventImg} alt="post-img" className='post-img' /> */}
                   <h3 className="post-title">{post.title}</h3>
                   <h4 className="post-subtitle">{post.subtitle}</h4>
                   <Link to='/posts' className='read-post'>Ler post</Link>
@@ -59,9 +78,11 @@ export default function Posts() {
             })
           )}
         </div>
-        <button className="carousel-arrow right" onClick={() => handleScroll('right')}>
-          <FaChevronRight />
-        </button>
+        {showArrows && (
+          <button className="carousel-arrow right" onClick={() => handleScroll('right')}>
+            <FaChevronRight />
+          </button>
+        )}
       </div>
     </section>
   );

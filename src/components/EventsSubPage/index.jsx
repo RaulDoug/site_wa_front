@@ -1,6 +1,5 @@
 import './styles.css';
 import { useEvents } from '../../hooks/useEvents.js';
-import eventImg from '../../assets/eventCardImage.png';
 import { useState, useEffect } from 'react';
 
 
@@ -32,7 +31,7 @@ export default function EventsSubPage() {
         <button onClick={() => setSelectedEvent(null)} className="back-btn">
           ← Voltar para agenda
         </button>
-        <img src={eventImg} alt={selectedEvent.title} />
+        <img src={selectedEvent.imageUrl} alt={selectedEvent.title} />
         <div className="text-content-event">
           <h1>{selectedEvent.title}</h1>
           <div className="event-sub-date-loc-info">
@@ -78,7 +77,9 @@ export default function EventsSubPage() {
         return (
           <div key={event._id} className="event-sub-card" onClick={() => setSelectedEvent(event)}>
             <div className="event-sub-img-container">
-              <img src={eventImg} alt="Imagem do evento" />
+              {event.imageUrl && (
+                <img src={event.imageUrl} alt="event-img" />
+              )}
             </div>
             <div className="event-sub-date-container">
               <span className="event-sub-day">{day}</span>

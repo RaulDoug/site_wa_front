@@ -7,12 +7,17 @@ import { FaRegNewspaper } from 'react-icons/fa6';
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import WhatsappBtn from '../WhatsappBtn';
+import { useEvents } from '../../hooks/useEvents.js';
+import { usePosts } from '../../hooks/usePosts.js';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return !!localStorage.getItem('token');
   });
+
+  const { events } = useEvents();
+  const { posts } = usePosts();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -24,8 +29,12 @@ export default function Header() {
         </Link>
         <nav className="header-links">
           <NavLink to='/' className='header-nav-link'>Início</NavLink>
-          <NavLink to='/blog' className='header-nav-link'>Blog</NavLink>
-          <NavLink to='/agenda' className='header-nav-link'>Agenda</NavLink>
+          {posts && posts.length > 0 && (
+            <NavLink to='/blog' className='header-nav-link'>Blog</NavLink>
+          )}
+          {events && events.length > 0 && (
+            <NavLink to='/agenda' className='header-nav-link'>Agenda</NavLink>
+          )}
           <NavLink to='/servicos' className='header-nav-link'>Serviços</NavLink>
           <NavLink to='/sobre' className='header-nav-link'>Sobre nós</NavLink>
           {isAuthenticated && (
@@ -52,14 +61,18 @@ export default function Header() {
             <IoHomeOutline className='sidebar-links-icons' />
             <p>Início</p>
           </NavLink>
-          <NavLink to='/blog' onClick={toggleSidebar} className='navlink-sidebar'>
-            <FaRegNewspaper className='sidebar-links-icons' />
-            <p>Blog</p>
-          </NavLink>
-          <NavLink to='/agenda' onClick={toggleSidebar} className='navlink-sidebar'>
-            <MdOutlineEventAvailable className='sidebar-links-icons' />
-            <p>Agenda</p>
-          </NavLink>
+          {posts && posts.length > 0 && (
+            <NavLink to='/blog' onClick={toggleSidebar} className='navlink-sidebar'>
+              <FaRegNewspaper className='sidebar-links-icons' />
+              <p>Blog</p>
+            </NavLink>
+          )}
+          {events && events.length > 0 && (
+            <NavLink to='/agenda' onClick={toggleSidebar} className='navlink-sidebar'>
+              <MdOutlineEventAvailable className='sidebar-links-icons' />
+              <p>Agenda</p>
+            </NavLink>
+          )}
           <NavLink to='/servicos' onClick={toggleSidebar} className='navlink-sidebar'>
             <MdOutlineWorkOutline className='sidebar-links-icons' />
             <p>Serviços</p>

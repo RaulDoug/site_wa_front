@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instância com as configurações bases
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
 });
 
 // Interceptador para injetar o token JWT automaticamente

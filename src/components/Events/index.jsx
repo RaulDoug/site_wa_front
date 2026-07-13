@@ -60,7 +60,7 @@ export default function Events({ limit }) {
             const month = monthInitials.replace('.', '').toUpperCase();
 
             return (
-              <div key={event._id} className="event-card">
+              <Link key={event._id} to="/agenda" state={{ eventId: event._id }} className="event-card">
                 {event.imageUrl && (
                   <img src={event.imageUrl} alt="event-img" />
                 )}
@@ -80,7 +80,7 @@ export default function Events({ limit }) {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })
         )}

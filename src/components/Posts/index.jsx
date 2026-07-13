@@ -84,15 +84,15 @@ export default function Posts() {
             posts.map((post) => {
 
               return (
-                <div key={post._id} className="post-card">
+                <Link key={post._id} to='/blog' state={{ postId: post._id }} className="post-card">
                   {post.imageUrl && (
                     <img src={post.imageUrl} alt="post-img" className="post-img" />
                   )}
                   {/* <img src={eventImg} alt="post-img" className='post-img' /> */}
                   <h3 className="post-title">{post.title}</h3>
                   <h4 className="post-subtitle">{post.subtitle}</h4>
-                  <Link to='/posts' className='read-post'>Ler post</Link>
-                </div>
+                  <span className='read-post'>Ler post</span>
+                </Link>
               );
             })
           )}

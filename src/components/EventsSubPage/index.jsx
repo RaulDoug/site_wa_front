@@ -1,12 +1,25 @@
 import './styles.css';
 import { useEvents } from '../../hooks/useEvents.js';
 import { useState, useEffect } from 'react';
-
+import { useLocation } from 'react-router-dom';
 
 export default function EventsSubPage() {
   const { events: displayedEvents, loading, error } = useEvents();
+  const location = useLocation();
 
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.eventId && displayedEvents.length > 0) {
+      const foundEvent = displayedEvents.find(e => e._id === location.state.eventId);
+      if (foundEvent) {
+        setTimeout(() => {
+          setSelectedEvent(foundEvent);
+        }, 0);
+        window.history.replaceState({}, document.title);
+      }
+    }
+  }, [location.state, displayedEvents]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });

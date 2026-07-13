@@ -1,11 +1,28 @@
 import { usePosts } from '../../hooks/usePosts';
 import './styles.css';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function PostsSubPage() {
   const { posts, loading, error } = usePosts();
+  const location = useLocation();
 
   const [selectedPost, setSelectedPost] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.postId && posts.length > 0) {
+      const foundPost = posts.find(p => p._id === location.state.postId);
+      if (foundPost) {
+        // Defer to avoid cascading renders warning/error
+        setTimeout(() => {
+          setSelectedPost(foundPost);
+        }, 0);
+        // Limpa o state na navegação para que se o usuário recarregar a página
+        // não fique preso no mesmo post aberto.
+        window.history.replaceState({}, document.title);
+      }
+    }
+  }, [location.state, posts]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });

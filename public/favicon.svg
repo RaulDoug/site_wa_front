@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="110 74 360 360" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente azul para as letras W e A -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#24489a" />
+      <stop offset="40%" stop-color="#2b5faa" />
+      <stop offset="100%" stop-color="#4187cd" />
+    </linearGradient>
+    
+    <!-- Gradiente laranja para os detalhes -->
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f99f38" />
+      <stop offset="100%" stop-color="#ea6723" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo removido (fundo transparente por padrão) -->
+
+  <g transform="translate(4, 0)">
+    <!-- ==================== DOCUMENTO (ÍCONE) ==================== -->
+    <!-- Borda externa laranja do documento -->
+    <path d="M 115 156 
+             A 12 12 0 0 1 127 144 
+             L 194 144 
+             L 236 186 
+             L 236 352 
+             A 12 12 0 0 1 224 364 
+             L 127 364 
+             A 12 12 0 0 1 115 352 Z" 
+          fill="url(#orangeGrad)" />
+
+    <!-- Fundo branco interno do documento -->
+    <path d="M 125 164 
+             A 4 4 0 0 1 129 160 
+             L 194 160 
+             L 226 192 
+             L 226 348 
+             A 4 4 0 0 1 222 352 
+             L 129 352 
+             A 4 4 0 0 1 125 348 Z" 
+          fill="#ffffff" />
+
+    <!-- Canto dobrado (Dog-ear) do documento -->
+    <path d="M 194 144 
+             L 236 186 
+             L 204 186 
+             A 10 10 0 0 1 194 176 Z" 
+          fill="url(#orangeGrad)" />
+
+    <!-- ==================== LETRA W ==================== -->
+    <path d="M 152 194 
+             L 193 194 
+             L 217 268 
+             L 242 194 
+             L 282 194 
+             L 307 268 
+             L 331 194 
+             L 372 194 
+             L 326 319 
+             L 284 319 
+             L 260 248 
+             L 236 319 
+             L 194 319 Z" 
+          fill="url(#blueGrad)" />
+
+    <!-- ==================== LETRA A ==================== -->
+    <path d="M 364 194 
+             L 409 194 
+             L 457 319 
+             L 419 319 
+             L 408 290 
+             L 364 290 
+             L 353 319 
+             L 319 319 Z 
+             M 374 261 
+             L 398 261 
+             L 386 226 Z" 
+          fill="url(#blueGrad)" />
+
+    <!-- ==================== CÍRCULO COM SINAL DE MAIS (+) ==================== -->
+    <g transform="translate(312, 249)">
+      <!-- Círculo Laranja (Borda preta removida) -->
+      <circle r="22" fill="url(#orangeGrad)" stroke="none" />
+      <!-- Sinal de Mais Brancos -->
+      <rect x="-3" y="-12" width="6" height="24" rx="1.5" fill="#ffffff" />
+      <rect x="-12" y="-3" width="24" height="6" rx="1.5" fill="#ffffff" />
+    </g>
+  </g>
+</svg>
